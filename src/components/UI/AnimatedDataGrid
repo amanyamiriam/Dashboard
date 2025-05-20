@@ -1,0 +1,41 @@
+import React from 'react';
+import { Box, Paper } from '@mui/material';
+import { motion, AnimatePresence } from 'framer-motion';
+import { DataGrid } from '@mui/x-data-grid';
+
+const AnimatedDataGrid = ({ rows, columns, ...props }) => {
+  return (
+    <Paper
+      component={motion.div}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      sx={{
+        height: 400,
+        width: '100%',
+        overflow: 'hidden',
+        '& .MuiDataGrid-row': {
+          cursor: 'pointer',
+        }
+      }}
+    >
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        components={{
+          Row: (props) => (
+            <motion.div
+              whileHover={{ backgroundColor: 'rgba(0,0,0,0.04)' }}
+              whileTap={{ scale: 0.99 }}
+            >
+              {props.children}
+            </motion.div>
+          )
+        }}
+        {...props}
+      />
+    </Paper>
+  );
+};
+
+export default AnimatedDataGrid;

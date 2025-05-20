@@ -3,170 +3,319 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#2F4F4F" />
+    <meta name="theme-color" content="#2D3B36" />
     <meta name="description" content="Flight Management Dashboard - Track flights, manage schedules, and monitor statistics" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     
-    <!-- Roboto Font for Material UI -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-    />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Material Icons -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
-
-    <!-- Custom Fonts -->
-    <link 
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
-      rel="stylesheet"
-    />
-
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <title>Flight Management Dashboard</title>
+    <title>Flight Dashboard</title>
 
     <style>
       :root {
-        --primary-color: #2F4F4F;
-        --secondary-color: #daa520;
-        --background-color: #f5f5f5;
+        --primary-color: #2D3B36;
+        --secondary-color: #DAA520;
+        --accent-blue: #4FB6D0;
+        --background-color: #F5F7F7;
         --card-background: #ffffff;
-        --text-primary: #333333;
-        --text-secondary: #666666;
-        --border-radius: 12px;
-        --transition-speed: 0.3s;
+        --text-primary: #2D3B36;
+        --text-secondary: #6B7280;
+        --border-radius: 16px;
+        --sidebar-width: 280px;
+        --animation-speed: 0.3s;
+        --hover-lift: 4px;
+        --focus-outline-color: #DAA520;
+        --chart-hover-scale: 1.02;
+        --chart-transition: 0.6s;
+        --notification-dot-size: 8px;
+        --tooltip-background: rgba(45, 59, 54, 0.95);
+        --chart-grid-color: rgba(107, 114, 128, 0.2);
+        --chart-tooltip-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --mobile-nav-height: 60px;
+        --chart-legend-gap: 12px;
       }
 
       body {
         margin: 0;
         padding: 0;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: 'Inter', sans-serif;
         background-color: var(--background-color);
         color: var(--text-primary);
       }
 
-      #root {
-        min-height: 100vh;
-        display: flex;
-        position: relative;
-      }
-
-      .loading-screen {
+      .sidebar {
+        background-color: var(--primary-color);
+        width: var(--sidebar-width);
+        height: 100vh;
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: var(--background-color);
+        padding: 2rem;
+        color: white;
+      }
+
+      .profile {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: center;
-        z-index: 9999;
-        transition: opacity var(--transition-speed);
+        gap: 1rem;
+        margin-bottom: 2rem;
       }
 
-      .loading-screen__spinner {
-        width: 50px;
-        height: 50px;
-        border: 5px solid var(--primary-color);
-        border-top-color: var(--secondary-color);
+      .profile-image {
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
-        animation: spin 1s linear infinite;
+        object-fit: cover;
       }
 
-      .loading-screen__text {
-        margin-top: 1rem;
-        font-weight: 500;
-        color: var(--text-secondary);
+      .nav-item {
+        padding: 0.75rem 1rem;
+        margin: 0.5rem 0;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
       }
 
-      /* Scrollbar Styling */
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+      .nav-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
       }
 
-      ::-webkit-scrollbar-track {
-        background: var(--background-color);
+      .main-content {
+        margin-left: var(--sidebar-width);
+        padding: 2rem;
       }
 
-      ::-webkit-scrollbar-thumb {
-        background: var(--primary-color);
-        border-radius: 4px;
+      .stats-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
       }
 
-      ::-webkit-scrollbar-thumb:hover {
-        background: var(--secondary-color);
-      }
-
-      /* Card Styles */
       .card {
         background: var(--card-background);
         border-radius: var(--border-radius);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      .chart-container {
+        background: var(--card-background);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .flight-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .active-users {
+        margin-top: 2rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: var(--border-radius);
+      }
+
+      .user-avatars {
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+      }
+
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid var(--primary-color);
+        margin-left: -8px;
+      }
+
+      .world-map {
+        margin-top: 1rem;
+        opacity: 0.6;
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+        }
+
+        .main-content {
+          margin-left: 0;
+        }
+
+        .sidebar.active {
+          transform: translateX(0);
+        }
+      }
+
+      /* Enhanced Card Animations */
+      .card {
+        transform: translateY(0);
+        transition: all var(--animation-speed) cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
       }
 
       .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(calc(-1 * var(--hover-lift)));
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
       }
 
-      /* Responsive Design */
-      @media (max-width: 768px) {
-        :root {
-          --border-radius: 8px;
-        }
-
-        .card {
-          margin: 0.5rem;
-        }
+      .card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.4), transparent 70%);
+        transform: translateX(-100%);
+        transition: transform 0.6s;
       }
 
-      @keyframes spin {
+      .card:hover::after {
+        transform: translateX(100%);
+      }
+
+      /* Enhanced Chart Animations */
+      .chart-container {
+        transform-origin: center;
+        animation: fadeInScale 0.5s ease-out;
+      }
+
+      @keyframes fadeInScale {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
         to {
-          transform: rotate(360deg);
+          opacity: 1;
+          transform: scale(1);
         }
       }
 
-      /* Print Styles */
-      @media print {
-        body {
-          background: white;
-        }
+      /* Enhanced Navigation */
+      .nav-item {
+        position: relative;
+        padding-left: 2.5rem;
+      }
 
-        .loading-screen,
-        .no-print {
-          display: none !important;
+      .nav-item::before {
+        content: '';
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--secondary-color);
+        opacity: 0;
+        transition: opacity var(--animation-speed);
+      }
+
+      .nav-item:hover::before,
+      .nav-item.active::before {
+        opacity: 1;
+      }
+
+      /* Enhanced Responsive Design */
+      @media (max-width: 1200px) {
+        .flight-stats {
+          grid-template-columns: 1fr;
         }
       }
 
-      /* Focus Styles for Accessibility */
-      :focus {
-        outline: 2px solid var(--secondary-color);
+      @media (max-width: 992px) {
+        :root {
+          --sidebar-width: 240px;
+        }
+
+        .stats-cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .stats-cards {
+          grid-template-columns: 1fr;
+        }
+
+        .main-content {
+          padding: 1rem;
+        }
+
+        .sidebar {
+          z-index: 1000;
+          box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      /* Accessibility Enhancements */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        padding: 8px;
+        background-color: var(--secondary-color);
+        color: white;
+        transition: top 0.3s;
+      }
+
+      .skip-link:focus {
+        top: 0;
+        z-index: 1001;
+      }
+
+      *:focus-visible {
+        outline: 3px solid var(--focus-outline-color);
         outline-offset: 2px;
       }
 
-      /* Selection Style */
-      ::selection {
-        background: var(--secondary-color);
-        color: white;
+      [role="button"],
+      [role="tab"],
+      [role="link"] {
+        cursor: pointer;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+
+      /* High Contrast Mode Support */
+      @media (forced-colors: active) {
+        .card,
+        .nav-item,
+        .chart-container {
+          border: 1px solid CanvasText;
+        }
       }
     </style>
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div class="loading-screen">
-      <div class="loading-screen__spinner"></div>
-      <div class="loading-screen__text">Loading dashboard...</div>
-    </div>
     <div id="root"></div>
   </body>
 </html>

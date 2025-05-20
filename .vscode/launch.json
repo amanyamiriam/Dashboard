@@ -1,0 +1,480 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Development",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "userDataDir": "${workspaceFolder}/.vscode/chrome-debug-profile",
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/src/*"
+            },
+            "skipFiles": [
+                "<node_internals>/**",
+                "${workspaceFolder}/node_modules/**"
+            ],
+            "trace": true
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Production Build",
+            "url": "http://localhost:5000",
+            "webRoot": "${workspaceFolder}/build",
+            "sourceMaps": true
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Mobile View",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--window-size=375,812",
+                "--auto-open-devtools-for-tabs",
+                "--enable-precise-memory-info",
+                "--enable-features=NetworkService"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Tablet View",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--window-size=1024,768",
+                "--touch-events=enabled"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Performance Testing",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--js-flags=--expose-gc",
+                "--enable-precise-memory-info",
+                "--disable-background-timer-throttling",
+                "--disable-renderer-backgrounding"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Accessibility Testing",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--force-color-profile=srgb",
+                "--force-high-contrast",
+                "--debug-packed-apps",
+                "--auto-open-devtools-for-tabs",
+                "--enable-automation",
+                "--load-extension=${workspaceFolder}/extensions/accessibility"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Network Debug",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--disable-network-throttling",
+                "--remote-debugging-port=9222",
+                "--enable-net-log-export-mode"
+            ],
+            "sourceMaps": true,
+            "trace": true
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Memory Profiling",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--enable-precise-memory-info",
+                "--js-flags=--expose-gc --track-gc-object-stats",
+                "--enable-memory-debug"
+            ],
+            "timeout": 20000
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Security Testing",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--disable-web-security",
+                "--ignore-certificate-errors",
+                "--allow-insecure-localhost"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - RTL Testing",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--force-rtl=1",
+                "--lang=ar"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Animation Debug",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--disable-frame-rate-limit",
+                "--show-fps-counter",
+                "--enable-gpu-rasterization"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - API Testing",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--disable-web-security",
+                "--user-data-dir=${workspaceFolder}/.vscode/chrome-api-testing",
+                "--enable-logging=network"
+            ],
+            "env": {
+                "REACT_APP_API_ENV": "testing"
+            }
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - SEO Testing",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--headless",
+                "--disable-gpu",
+                "--dump-dom",
+                "--run-all-compositor-stages-before-draw"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Dark Mode",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--force-dark-mode",
+                "--enable-features=WebContentsForceDark"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - State Debug",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--enable-logging=state",
+                "--enable-logging=redux",
+                "--enable-features=DebugState"
+            ],
+            "sourceMaps": true,
+            "trace": true
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Offline Mode",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--disable-network-access",
+                "--enable-features=NetworkServiceInProcess"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Performance Optimization",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--enable-zero-copy",
+                "--enable-gpu-memory-buffer-compositor-resources",
+                "--enable-oop-rasterization",
+                "--enable-features=LazyFrameLoading,QuickIntensiveWakeUpThrottling"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Chart Testing",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--enable-blink-features=CanvasMarkup",
+                "--enable-experimental-web-platform-features",
+                "--enable-gpu-rasterization"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Redux DevTools",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--load-extension=${workspaceFolder}/extensions/redux-devtools",
+                "--enable-features=DebugRedux",
+                "--auto-open-devtools-for-tabs"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - SVG Debug",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--enable-blink-features=SVGPathSegList",
+                "--enable-features=SVGTransformList",
+                "--enable-features=SVGAnimationDebug"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Advanced Memory",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--js-flags=--max-old-space-size=4096",
+                "--enable-memory-coordinator",
+                "--enable-memory-ablation",
+                "--enable-memory-pressure-notifications"
+            ]
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Full Debug Environment",
+            "configurations": [
+                "Launch Chrome - Development",
+                "Launch Chrome - Mobile View"
+            ]
+        },
+        {
+            "name": "Cross-Device Testing",
+            "configurations": [
+                "Launch Chrome - Mobile View",
+                "Launch Chrome - Tablet View"
+            ]
+        },
+        {
+            "name": "Quality Assurance Suite",
+            "configurations": [
+                "Launch Chrome - Performance Testing",
+                "Launch Chrome - Accessibility Testing"
+            ]
+        },
+        {
+            "name": "Performance Analysis Suite",
+            "configurations": [
+                "Launch Chrome - Network Debug",
+                "Launch Chrome - Memory Profiling"
+            ]
+        },
+        {
+            "name": "Internationalization Testing",
+            "configurations": [
+                "Launch Chrome - RTL Testing",
+                "Launch Chrome - Accessibility Testing"
+            ]
+        },
+        {
+            "name": "Visual Testing Suite",
+            "configurations": [
+                "Launch Chrome - Animation Debug",
+                "Launch Chrome - Dark Mode"
+            ]
+        },
+        {
+            "name": "Integration Testing Suite",
+            "configurations": [
+                "Launch Chrome - API Testing",
+                "Launch Chrome - Network Debug"
+            ]
+        },
+        {
+            "name": "Advanced Debug Suite",
+            "configurations": [
+                "Launch Chrome - State Debug",
+                "Launch Chrome - Performance Optimization"
+            ]
+        },
+        {
+            "name": "Chart Development Suite",
+            "configurations": [
+                "Launch Chrome - Chart Testing",
+                "Launch Chrome - Animation Debug"
+            ]
+        },
+        {
+            "name": "State Management Suite",
+            "configurations": [
+                "Launch Chrome - Redux DevTools",
+                "Launch Chrome - State Debug"
+            ]
+        },
+        {
+            "name": "Graphics Debug Suite",
+            "configurations": [
+                "Launch Chrome - SVG Debug",
+                "Launch Chrome - WebGL Debug"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Event Debug",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--enable-logging=dom",
+                "--enable-features=EventTiming",
+                "--enable-blink-features=EventTiming",
+                "--enable-features=EventLogging"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Layout Debug",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--enable-blink-features=LayoutNG",
+                "--enable-features=LayoutDebug",
+                "--enable-logging=layout",
+                "--show-layout-shift-regions"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Advanced Network",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeArgs": [
+                "--enable-features=NetworkQualityEstimator",
+                "--enable-features=NetworkTimeQueries",
+                "--enable-features=NetworkServiceMemoryCache",
+                "--enable-features=PrefetchPrivacyChanges"
+            ]
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Full Debug Environment",
+            "configurations": [
+                "Launch Chrome - Development",
+                "Launch Chrome - Mobile View"
+            ]
+        },
+        {
+            "name": "Cross-Device Testing",
+            "configurations": [
+                "Launch Chrome - Mobile View",
+                "Launch Chrome - Tablet View"
+            ]
+        },
+        {
+            "name": "Quality Assurance Suite",
+            "configurations": [
+                "Launch Chrome - Performance Testing",
+                "Launch Chrome - Accessibility Testing"
+            ]
+        },
+        {
+            "name": "Performance Analysis Suite",
+            "configurations": [
+                "Launch Chrome - Network Debug",
+                "Launch Chrome - Memory Profiling"
+            ]
+        },
+        {
+            "name": "Internationalization Testing",
+            "configurations": [
+                "Launch Chrome - RTL Testing",
+                "Launch Chrome - Accessibility Testing"
+            ]
+        },
+        {
+            "name": "Visual Testing Suite",
+            "configurations": [
+                "Launch Chrome - Animation Debug",
+                "Launch Chrome - Dark Mode"
+            ]
+        },
+        {
+            "name": "Integration Testing Suite",
+            "configurations": [
+                "Launch Chrome - API Testing",
+                "Launch Chrome - Network Debug"
+            ]
+        },
+        {
+            "name": "Advanced Debug Suite",
+            "configurations": [
+                "Launch Chrome - State Debug",
+                "Launch Chrome - Performance Optimization"
+            ]
+        },
+        {
+            "name": "Chart Development Suite",
+            "configurations": [
+                "Launch Chrome - Chart Testing",
+                "Launch Chrome - Animation Debug"
+            ]
+        },
+        {
+            "name": "State Management Suite",
+            "configurations": [
+                "Launch Chrome - Redux DevTools",
+                "Launch Chrome - State Debug"
+            ]
+        },
+        {
+            "name": "Graphics Debug Suite",
+            "configurations": [
+                "Launch Chrome - SVG Debug",
+                "Launch Chrome - WebGL Debug"
+            ]
+        },
+        {
+            "name": "Layout Analysis Suite",
+            "configurations": [
+                "Launch Chrome - Layout Debug",
+                "Launch Chrome - Performance Optimization"
+            ]
+        },
+        {
+            "name": "Event Monitoring Suite",
+            "configurations": [
+                "Launch Chrome - Event Debug",
+                "Launch Chrome - State Debug"
+            ]
+        }
+    ]
+}
